@@ -1,68 +1,71 @@
-const reasons = [
-  "You're actually mad cute 😳",
-  "You’re funny in a lowkey way",
-  "You care about stuff more than you show",
-  "You're the realest out here",
-  "You’re mad easy to talk to",
-  "Your laugh? Literally serotonin",
-  "You match my weird in the best way",
-  "You're lowkey my comfort person",
-  "You're unexpectedly deep sometimes",
-  "You just got *that* vibe idk"
-];
-
-const list = document.getElementById("reasons-list");
-reasons.forEach(reason => {
-  const li = document.createElement("li");
-  li.textContent = reason;
-  list.appendChild(li);
-});
-
-// Bouncey Skibidi Logic
-const imageArea = document.getElementById("image-area");
-const maxImages = 8;
-let currentImages = 0;
-
-function createBouncingImage() {
-  if (currentImages >= maxImages) return;
-
-  const img = document.createElement("img");
-  img.src = "skibidi.jpeg";
-  img.style.width = "80px";
-  img.style.height = "80px";
-  img.style.position = "absolute";
-
-  let x = Math.random() * (window.innerWidth - 80);
-  let y = Math.random() * (window.innerHeight - 80);
-  let dx = (Math.random() * 4 + 2) * (Math.random() < 0.5 ? 1 : -1);
-  let dy = (Math.random() * 4 + 2) * (Math.random() < 0.5 ? 1 : -1);
-
-  img.style.left = `${x}px`;
-  img.style.top = `${y}px`;
-
-  imageArea.appendChild(img);
-  currentImages++;
-
-  function animate() {
-    x += dx;
-    y += dy;
-
-    if (x <= 0 || x >= window.innerWidth - 120) dx = -dx;
-    if (y <= 0 || y >= window.innerHeight - 120) dy = -dy;
-
-    img.style.left = `${x}px`;
-    img.style.top = `${y}px`;
-
-    requestAnimationFrame(animate);
-  }
-
-  animate();
+body {
+  background-color: #ffc0cb; /* Full pink background */
+  font-family: "Segoe UI", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  overflow: hidden;
 }
 
-const interval = setInterval(() => {
-  if (currentImages < maxImages) {
-    createBouncingImage();
-  } else {
-    clearInterval(interval);
-  }
-}, 1000);
+.container {
+  text-align: center;
+  max-width: 90%;
+  width: 500px;
+  padding: 2rem;
+  background-color: #fff0f5;
+  border-radius: 1rem;
+  box-shadow: 0 0 25px rgba(255, 182, 193, 0.5);
+}
+
+h1 {
+  color: #d63384;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  text-align: left;
+}
+
+li {
+  background-color: #ffe6f0;
+  margin-bottom: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  transition: 0.3s;
+}
+
+li:hover {
+  background-color: #ffcde3;
+}
+
+.footer {
+  margin-top: 2rem;
+  color: #888;
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+/* Sharkcat gif styles */
+.cat-gif {
+  position: fixed;
+  top: 50%;
+  width: 100px;
+  transform: translateY(-50%);
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.9;
+}
+
+.cat-gif.left {
+  left: 10px;
+}
+
+.cat-gif.right {
+  right: 10px;
+}
+

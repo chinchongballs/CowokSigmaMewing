@@ -1,14 +1,14 @@
 const reasons = [
-  "You’re actually fun to talk to.",
+  "Youre Cute.",
   "You get my weird jokes.",
-  "You don’t make things complicated.",
+  "Youre Cute.",
   "You somehow always know what to say.",
-  "You make me smile without even trying.",
+  "Youre Cute.",
   "You’re chill and lowkey nice.",
-  "You give off main character vibes.",
+  "Youre Cute.",
   "Even when you’re quiet, it’s comforting.",
-  "You’re just... different in a good way.",
-  "And yeah, I just like you, that's it."
+  "Youre Cute.",
+  "Youre Cute."
 ];
 
 const list = document.getElementById("reasons-list");

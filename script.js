@@ -47,8 +47,8 @@ function createBouncingImage() {
     x += dx;
     y += dy;
 
-    if (x <= 0 || x >= window.innerWidth - 80) dx = -dx;
-    if (y <= 0 || y >= window.innerHeight - 80) dy = -dy;
+    if (x <= 0 || x >= window.innerWidth - 120) dx = -dx;
+    if (y <= 0 || y >= window.innerHeight - 120) dy = -dy;
 
     img.style.left = `${x}px`;
     img.style.top = `${y}px`;

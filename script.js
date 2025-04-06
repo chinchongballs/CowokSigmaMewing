@@ -1,47 +1,59 @@
 const reasons = [
-  "You're fun to talk to, even about random stuff.",
-  "You laugh at things I didn't expect.",
-  "You're cool without acting like it.",
-  "Conversations with you never feel forced.",
-  "You're smart but not annoying about it.",
-  "You’ve got that chill energy I like.",
-  "You somehow make boring stuff better.",
-  "You say real things, not just surface talk.",
-  "You got your own vibe and I respect that.",
-  "It just feels right, no extra reason needed."
+  "You’re actually fun to talk to.",
+  "You get my weird jokes.",
+  "You don’t make things complicated.",
+  "You somehow always know what to say.",
+  "You make me smile without even trying.",
+  "You’re chill and lowkey nice.",
+  "You give off main character vibes.",
+  "Even when you’re quiet, it’s comforting.",
+  "You’re just... different in a good way.",
+  "And yeah, I just like you, that's it."
 ];
 
 const list = document.getElementById("reasons-list");
-
-reasons.forEach(reason => {
+reasons.forEach(text => {
   const li = document.createElement("li");
-  li.textContent = reason;
+  li.textContent = text;
   list.appendChild(li);
 });
 
-// Bouncing image setup
 const imageArea = document.getElementById("image-area");
-const img = document.createElement("img");
-img.src = "skibidi.jpeg"; // make sure this is in the same folder
-img.classList.add("bouncing");
-imageArea.appendChild(img);
+let images = [];
+let maxImages = 6;
 
-let dx = 2;
-let dy = 2;
-let x = Math.random() * (window.innerWidth - 100);
-let y = Math.random() * (window.innerHeight - 100);
+function createImage() {
+  if (images.length >= maxImages) return;
+  const img = document.createElement("img");
+  img.src = "skibidi.jpeg"; // Make sure this exists
+  img.className = "bouncing-image";
 
-function bounce() {
-  if (x <= 0 || x + 80 >= window.innerWidth) dx *= -1;
-  if (y <= 0 || y + 80 >= window.innerHeight) dy *= -1;
+  let posX = Math.random() * (window.innerWidth - 80);
+  let posY = Math.random() * (window.innerHeight - 80);
+  let velX = 2 * (Math.random() < 0.5 ? -1 : 1);
+  let velY = 2 * (Math.random() < 0.5 ? -1 : 1);
 
-  x += dx;
-  y += dy;
+  img.style.left = `${posX}px`;
+  img.style.top = `${posY}px`;
 
-  img.style.left = `${x}px`;
-  img.style.top = `${y}px`;
-
-  requestAnimationFrame(bounce);
+  imageArea.appendChild(img);
+  images.push({ img, posX, posY, velX, velY });
 }
 
-bounce();
+function animate() {
+  images.forEach(obj => {
+    obj.posX += obj.velX;
+    obj.posY += obj.velY;
+
+    if (obj.posX <= 0 || obj.posX >= window.innerWidth - 80) obj.velX *= -1;
+    if (obj.posY <= 0 || obj.posY >= window.innerHeight - 80) obj.velY *= -1;
+
+    obj.img.style.left = `${obj.posX}px`;
+    obj.img.style.top = `${obj.posY}px`;
+  });
+  requestAnimationFrame(animate);
+}
+
+setInterval(createImage, 1500);
+animate();
+

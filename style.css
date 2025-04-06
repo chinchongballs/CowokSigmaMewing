@@ -45,3 +45,22 @@ li:hover {
   color: #888;
   font-style: italic;
 }
+
+/* 🦈 Sharkcat gif styles */
+.cat-gif {
+  position: fixed;
+  top: 50%;
+  width: 120px;
+  transform: translateY(-50%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.cat-gif.left {
+  left: 10px;
+}
+
+.cat-gif.right {
+  right: 10px;
+}
+

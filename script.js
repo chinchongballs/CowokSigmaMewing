@@ -1,78 +1,68 @@
-// 💌 Your custom reasons
 const reasons = [
-  "You're effortlessly funny 💀",
-  "You always make dry convos feel alive 😭",
-  "Your vibes are chaotic but comforting",
-  "You understand more than you let on",
-  "You make simple stuff feel fun",
-  "You're kinda smart ngl 🤨",
-  "You're not like the others fr 😤",
-  "You got that lowkey main character energy",
-  "You’re honest. Like brutally. And I respect that.",
-  "You made me write this 🤡"
+  "You're actually mad cute 😳",
+  "You’re funny in a lowkey way",
+  "You care about stuff more than you show",
+  "You're the realest out here",
+  "You’re mad easy to talk to",
+  "Your laugh? Literally serotonin",
+  "You match my weird in the best way",
+  "You're lowkey my comfort person",
+  "You're unexpectedly deep sometimes",
+  "You just got *that* vibe idk"
 ];
 
-const listElement = document.getElementById("reasons-list");
-
+const list = document.getElementById("reasons-list");
 reasons.forEach(reason => {
   const li = document.createElement("li");
   li.textContent = reason;
-  listElement.appendChild(li);
+  list.appendChild(li);
 });
 
-// 🧼 Bouncing image logic
-const MAX_IMAGES = 8;
-const imgSrc = "skibidi.jpeg"; // use your own image
-const imgSize = 150;
+// Bouncey Skibidi Logic
+const imageArea = document.getElementById("image-area");
+const maxImages = 8;
+let currentImages = 0;
 
-const container = document.getElementById("image-area");
-const bouncingImages = [];
-
-function createBouncingImage(x = 100, y = 100) {
-  if (bouncingImages.length >= MAX_IMAGES) return;
+function createBouncingImage() {
+  if (currentImages >= maxImages) return;
 
   const img = document.createElement("img");
-  img.src = imgSrc;
-  img.style.width = imgSize + "px";
-  img.style.height = imgSize + "px";
+  img.src = "skibidi.jpeg";
+  img.style.width = "80px";
+  img.style.height = "80px";
   img.style.position = "absolute";
-  img.style.left = x + "px";
-  img.style.top = y + "px";
-  img.style.zIndex = 10;
-  container.appendChild(img);
 
-  const direction = {
-    dx: Math.random() > 0.5 ? 2 : -2,
-    dy: Math.random() > 0.5 ? 2 : -2
-  };
+  let x = Math.random() * (window.innerWidth - 80);
+  let y = Math.random() * (window.innerHeight - 80);
+  let dx = (Math.random() * 4 + 2) * (Math.random() < 0.5 ? 1 : -1);
+  let dy = (Math.random() * 4 + 2) * (Math.random() < 0.5 ? 1 : -1);
 
-  const instance = { img, x, y, ...direction };
-  bouncingImages.push(instance);
+  img.style.left = `${x}px`;
+  img.style.top = `${y}px`;
+
+  imageArea.appendChild(img);
+  currentImages++;
+
+  function animate() {
+    x += dx;
+    y += dy;
+
+    if (x <= 0 || x >= window.innerWidth - 80) dx = -dx;
+    if (y <= 0 || y >= window.innerHeight - 80) dy = -dy;
+
+    img.style.left = `${x}px`;
+    img.style.top = `${y}px`;
+
+    requestAnimationFrame(animate);
+  }
+
+  animate();
 }
 
-function update() {
-  bouncingImages.forEach((item) => {
-    item.x += item.dx;
-    item.y += item.dy;
-
-    if (item.x <= 0 || item.x + imgSize >= window.innerWidth) {
-      item.dx *= -1;
-      if (bouncingImages.length < MAX_IMAGES) {
-        createBouncingImage(item.x, item.y);
-      }
-    }
-
-    if (item.y <= 0 || item.y + imgSize >= window.innerHeight) {
-      item.dy *= -1;
-      if (bouncingImages.length < MAX_IMAGES) {
-        createBouncingImage(item.x, item.y);
-      }
-    }
-
-    item.img.style.left = item.x + "px";
-    item.img.style.top = item.y + "px";
-  });
-}
-
-createBouncingImage();
-setInterval(update, 10);
+const interval = setInterval(() => {
+  if (currentImages < maxImages) {
+    createBouncingImage();
+  } else {
+    clearInterval(interval);
+  }
+}, 1000);

@@ -6,6 +6,7 @@ body {
   align-items: center;
   height: 100vh;
   margin: 0;
+  overflow: hidden;
 }
 
 .container {
@@ -15,6 +16,8 @@ body {
   background-color: #fff0f5;
   border-radius: 1rem;
   box-shadow: 0 0 20px rgba(255, 182, 193, 0.3);
+  z-index: 10;
+  position: relative;
 }
 
 h1 {
@@ -46,11 +49,11 @@ li:hover {
   font-style: italic;
 }
 
-/* 🦈 Sharkcat gif styles */
+/* 🐱 Cat GIF Styles */
 .cat-gif {
   position: fixed;
   top: 50%;
-  width: 120px;
+  width: 160px;
   transform: translateY(-50%);
   z-index: 1;
   pointer-events: none;
